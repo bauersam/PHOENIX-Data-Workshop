@@ -1,0 +1,53 @@
+![](images/Phoenix_Brandmark_Horizontal_COLOR.png){width="538"}
+
+# Data
+
+### Packages
+
+```{r}
+library(knitr)
+library(tidyverse)
+
+devtools::install_github("hrbrmstr/waffle")
+library(waffle)
+```
+
+
+### Dataset
+
+```{r}
+# data
+data(chickwts)
+chickwts
+```
+
+
+#What does our dataset describe?
+```{r}
+
+#nrows = rows in our data
+chickcount <- nrow(chickwts)
+
+#Visualize 
+waffle(
+  c('Chicks' = chickcount), 
+  rows = 10, 
+  colors = c("gold"),
+  title = 'How many chicks are in our dataset?', 
+  legend_pos="bottom"
+)
+
+#Each chick needs a name so that we know each chick has its own row of data
+data(starwars)
+names <- starwars %>% select(c(name))
+names #We have 87 Star Wars names, butwe only need 71 names for our 71 chicks
+
+#Let's take the first 71 names
+#[X, Y]
+#[rows, columns]
+c <- names[1:71,]
+
+#Attach the names to the chicks
+chickwts <- cbind(c, chickwts)
+
+```
